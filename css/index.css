@@ -1,0 +1,666 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,700');
+@import url('https://fonts.googleapis.com/css?family=Lato');
+
+:root {
+  --text-primery: #464646;
+  --text-secondary: #5a5a5a;
+  --bg-light: #f3f3f3;
+  --bg-secondary: #cccccc;
+  --light-blue: #a2d1ff;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  color: var(--text-secondary);
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items:center; 
+  font-family: 'Roboto', sans-serif;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+/*************************************************************
+
+  clock 
+
+**************************************************************/
+
+.clock {
+  position: relative;
+  text-transform: uppercase;
+  padding: 30px 10px;
+  font-size: 9vw;
+  opacity: 0;
+  pointer-events: none;
+  animation: fadeIn 0.6s ease-out 1.5s forwards;
+}
+
+.clock > .row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+} 
+
+.clock span {
+  margin: 0 10px;
+  color: rgb(80, 80, 80);
+  font-weight: 600;
+  transition: color 0.4s ease;
+}
+
+
+/* minutes boxes */
+.boxes {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0 0 0;
+}
+.min-box {
+  width: 12px;
+  height: 12px;
+  background:rgba(70, 70, 70, 0.8); 
+  border-radius: 2px;
+  margin: 5px;
+  transition: all 0.4s ease;
+}
+.clock .min-box.blue-light-hi {
+  background: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 0 20px rgb(1, 234, 255,0.5), 0 0 55px rgb(1, 234, 255,0.5), 0 0 75px rgb(1, 234, 255,0.5);
+}
+
+
+/*************************************************************
+
+  sidebar menu 
+
+**************************************************************/
+.sidebar {
+  position: fixed;
+  left:0;
+  transform: translateX(-100%);
+  width:100vw;
+  height: 100%;
+  margin: 0;
+  padding: 80px 0px 10px 0px;
+  overflow: none;
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+.sidebar.open {
+  opacity: 1;
+  transform: translateX(0px);
+}
+
+
+/*************************************************************
+
+  menu open close button 
+
+**************************************************************/
+.menu-btn {
+    position: fixed;
+    left: 10px;
+    top: 10px;
+    padding: 2px 6px;
+    z-index: 1;
+    cursor: pointer;
+    background-color: rgb(78, 78, 78);
+    transition: all 0.5s ease;
+}
+
+.menu-btn:hover {
+  background-color:rgba(255, 255, 255, 0.3);
+  /* color: var(--text-primery); */
+}
+.bar1, .bar2, .bar3 {
+    width: 28px;
+    height: 3px;
+    background-color: white;
+    margin: 6px 0;
+    transition: all 0.4s ease;
+}
+.change {
+  background: none;
+}
+.change .bar1 {
+    transform: rotate(-45deg) translate(-6px, 6px);
+    background-color:var(--text-secondary);
+}
+.change .bar2 {opacity: 0;}
+.change .bar3 {
+    transform: rotate(45deg) translate(-6px, -6px);
+    background-color: var(--text-secondary);
+}
+
+
+
+/*************************************************************
+
+  sidebar tabs
+
+**************************************************************/
+/* Style the tab */
+.tab {
+  display: flex;
+  border: none;
+  background-color: #ffffff;
+  overflow: hidden;
+}
+/* Style the buttons inside the tab */
+.tab button {
+  flex: 1;
+  color: var(--text-secondary);
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 16px 26px;
+  font-size: 17px;
+  transition: 0.3s;
+}
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #ddd;
+}
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent-wrapper {
+  margin: 0;
+  padding: 0 0 70px 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+}
+.tabcontent {
+  display: none;
+  margin: 5px;
+  text-transform: capitalize;
+  text-align: center;
+  animation: fadeIn 1s;
+}
+.tabcontent .head-title {
+  font-size: 1.6rem;  
+  padding: 0;
+  margin: 15px 15px 15px 20px;
+  text-align: center;
+  font-weight: normal;
+}
+.tabcontent .sub-title {
+  font-size: 1.4rem;  
+  padding: 0;
+  margin: 5px 0 15px 0;
+  text-align: left;
+  font-weight: normal;
+}
+.tabcontent > div {
+  background-color: #ffffff;
+  padding: 15px 15px;
+  margin-top: 5px;
+}
+
+
+/*************************************************************
+
+  tab elements inputs design
+
+**************************************************************/
+/* input color - color picker */
+input[type=color]{
+  width: 70px; 
+  height: 40px;
+  border: none;
+  outline: none;
+  background: transparent;
+  cursor: pointer;
+}
+ /* input range */
+input[type=range] {
+  height: 25px;
+  -webkit-appearance: none;
+  width: 100%;
+  background: transparent;
+}
+input[type=range]:focus {
+  outline: none;
+}
+input[type=range]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 2px;
+  cursor: pointer;
+  background: #2497E3;
+}
+input[type=range]::-webkit-slider-thumb {
+  border: 1px solid rgb(0, 204, 255);
+  height: 16px;
+  width: 16px;
+  border-radius: 25px;
+  background: rgb(122, 188, 255);
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: -7px;
+}
+input[type=range]:focus::-webkit-slider-runnable-track {
+  background: #2497E3;
+}
+
+/* input border width for border */
+.clock-border-width input[type=number]{
+  width: 63px; 
+  font-size: 16px;
+  outline: none;
+  padding: 5px 5px 5px 10px;
+  text-align: center;
+  border: 2px solid var(--bg-light);
+  color: var(--text-secondary);
+  text-align: center;
+}
+/* input edit url for image tab */
+.edit-url {
+  width: 100%;
+  padding: 15px;
+  border:0;
+  outline: none;
+}
+
+
+
+
+
+
+
+
+/*************************************************************
+
+  alarm clock tab 
+
+**************************************************************/
+/* input clock in clock tab */
+#clock .clock-time input{
+  font-size: 35px;
+  border: none;
+  outline: none;
+  font-family: 'Roboto', sans-serif;
+  padding: 10px 0 10px 20px;
+  width: 100%;
+  color: var(--text-secondary);
+  background: transparent;
+  text-align: center;
+}
+/* AM/PM */
+#clock .clock-time input::-webkit-datetime-edit-ampm-field {
+  /* color: #fff; */
+  padding: 0;
+  margin: 0;
+} 
+/* Up/Down arrows for incrementing/decrementing the value */
+#clock .clock-time input::-webkit-inner-spin-button {
+  margin: 0;
+  padding: 0 5px;
+  margin-left: -5px; 
+  background: none;
+}
+
+
+/*************************************************************
+
+  alarm clock preview div 
+
+**************************************************************/
+.alarm-preview {
+  position: absolute;
+  width: 100%;
+  top: -75px;
+  left: 0;
+  text-align: center;
+  pointer-events: none;
+  color: white;
+  opacity: 0;
+  transform: translateY(-100%);
+  transition: opacity 0.5s ease;
+  animation: alarm-preview-show 0.7s ease infinite alternate;
+  animation-play-state: paused;
+}
+.alarm-preview > div:nth-child(1){
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.5),
+               0 0 35px rgba(255, 255, 255, 0.5)
+              ; 
+  text-transform: uppercase;
+  font-size: 40px;
+}
+.alarm-preview > div:nth-child(2){
+  text-transform: capitalize;
+  font-size: 14px;
+}
+.alarm-preview.fade-in-slide-top {
+  animation-play-state: running;
+}
+.fade-in-slide-top {
+  opacity: 1;
+  transform: translateY(0%);
+}
+
+
+/*************************************************************
+
+  alarm tab - sound list 
+
+**************************************************************/
+.sound-list li.toggle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  margin:6px 0;
+  padding: 15px 15px;
+  background-color:white;
+  border:2px solid var(--bg-light);
+  overflow:hidden;
+  width: 100%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.sound-list li.toggle:hover {
+  background-color:var(--light-blue);
+  color: white; 
+}
+.sound-list li.toggle.previewSound {
+  background-color: var(--light-blue);
+  color: white; 
+  background-size: 50px 50px;
+  background-image: linear-gradient(
+    -45deg, 
+    rgba(255, 255, 255, .2) 25%, 
+    transparent 25%, 
+    transparent 50%, 
+    rgba(255, 255, 255, .2) 50%, 
+    rgba(255, 255, 255, .2) 75%, 
+    transparent 75%, 
+    transparent
+  );
+  animation: progress-anim 5s infinite linear;
+} 
+.sound-list li.toggle .title {
+  font-size: 14px;  
+  font-weight: 300;
+  text-align:left;
+  pointer-events: none;
+}
+
+
+/*************************************************************
+
+  speaker tab 
+
+**************************************************************/
+#interval-text {
+  font-size: 1.5rem;
+}
+
+.call-text {
+  text-align-last: left;
+  margin: 15px 0px 10px 0;
+}
+
+
+/*************************************************************
+
+  main buttons - blue buttons with icon animations 
+
+**************************************************************/
+.main-button {
+  background-color: var(--light-blue); 
+  color: white; 
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 5px;
+  margin-top: 5px;
+  width: 100%;
+  min-height: 50px;
+  cursor: pointer;
+  outline: none;
+  transform: translateX(0px);
+  text-transform: capitalize;
+}
+.main-button i {
+  opacity: 0;
+  transform: translateX(15px);
+  transition: all 0.5s ease;
+}
+.main-button:hover i {
+  opacity: 1;
+  transform: translateX(0px);
+}
+.main-button span {
+  transition: all 0.5s ease;
+}
+.main-button:hover span {
+  transform: translateX(-10px);
+  transition: all 0.5s ease;
+}
+
+
+/*************************************************************
+
+  animations
+
+**************************************************************/
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+@keyframes progress-anim {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 100% 100%;
+  }
+}
+@keyframes alarm-preview-show {
+  0% {
+   transform: scale(1);
+  } 
+  100% {
+    transform: scale(1.1);
+  }
+}
+
+
+/*************************************************************
+
+  switch checkbox
+
+**************************************************************/
+/* The switch - the box around the slider */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 35px;
+  height: 16px;
+}
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+/* The slider */
+.switch .slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: .2s;
+  box-shadow: inset 0 0 7px #858585;
+}
+.switch .slider:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 0px;
+  bottom: 0px;
+  background-color: rgb(80, 80, 80);
+  transition: .2s;
+}
+.switch input:checked + .slider {
+  background-color: #7abcff;
+}
+.switch input:checked + .slider:before {
+  transform: translateX(20px);
+}
+/* Rounded sliders */
+.switch .slider.round {
+  border-radius: 34px;
+}
+.switch .slider.round:before {
+  border-radius: 50%;
+}
+
+
+/*************************************************************
+
+  scroll bar 
+
+**************************************************************/
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: rgb(158, 158, 158);
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(122, 122, 122);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-secondary);
+}
+
+
+/*************************************************************
+
+  helpers
+
+**************************************************************/
+/* colors */
+.text-primery {
+  color: var(--text-primery) !important;
+}
+.text-secondary {
+  color: var(--text-secondary) !important;
+}
+.text-info {
+  color: var(--light-blue) !important;
+}
+.bg-light {
+  background-color: var(--bg-light) !important;
+}
+.bg-secondary {
+  background-color: var(--bg-secondary) !important;
+}
+/* flex */
+.flex {
+  display: flex;
+}
+.flex-center-x-main-axis {
+  justify-content: center;
+}
+.flex-center-y-main-axis {
+  align-items: center;
+}
+.flex-space-around-x-main-axis {
+  justify-content: space-around;
+}
+.flex-space-between-x-main-axis {
+  justify-content: space-between;
+}
+.flex-start-x-main-axis {
+  justify-content: flex-start;
+}
+ /* margins */
+.ml-10 {
+  margin-left: 10px;
+}
+.mt-10 {
+  margin-top: 10px;
+}
+.mb-10 {
+  margin-bottom: 10px;
+}
+.ml-20 {
+  margin-left: 20px;
+}
+.ml-auto {
+  margin: auto;
+}
+.bg-disable {
+  opacity: 0.5;
+}
+
+
+
+
+/*************************************************************
+
+  media queries - mobile first
+
+**************************************************************/
+@media (min-width: 460px) { 
+  .sidebar {
+    width:100vw;
+  }
+  .clock {
+    font-size: 7vw;
+    padding: 40px 30px;
+  }
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) { 
+  .sidebar {
+    width:300px;
+  }
+  .clock {
+    font-size: 35px;
+    padding: 40px 30px;
+  }
+ }
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) { 
+  .clock {
+    font-size: 40px;
+    padding: 40px 30px;
+  }
+}
